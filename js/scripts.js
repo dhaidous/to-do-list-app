@@ -1,43 +1,42 @@
 $(document).ready(function () {
-    // Function to add a new item to the list
     function newItem() {
+        // jQuery
+        // 1. Adding a new item to the list of items:
         let inputValue = $('#input').val();
         if (inputValue === '') {
-            alert('You must write something!');
+            alert("You must write something!");
         } else {
             let li = $('<li></li>').text(inputValue);
-            // Create the delete button and append it to the li
-            let deleteButton = $('<button class="delete">X</button>');
-            li.append(deleteButton);
-
-            // Append the new li to the list
             $('#list').append(li);
 
-            // Clear the input field
-            $('#input').val('');
-
-            // Mark the item as done on double click
-            li.on('dblclick', function () {
-                li.toggleClass('strike');
+            // 2. Crossing out an item from the list of items:
+            li.on("dblclick", function () {
+                li.toggleClass("strike");
             });
 
-            // Delete the item when the delete button is clicked
-            deleteButton.on('click', function () {
+            // 3. Adding the delete button "X":
+            let crossOutButton = $('<button class="delete">X</button>');
+            li.append(crossOutButton);
+
+            crossOutButton.on("click", function () {
                 li.remove();
             });
 
-            // Enable reordering of the list items
+            // 4. Reordering the items:
             $('#list').sortable();
         }
+
+        // Clear the input field
+        $('#input').val('');
     }
 
-    // Event listener for the add button
-    $('#button').on('click', function () {
+    // Event listener for the Add button
+    $('#button').on("click", function () {
         newItem();
     });
 
     // Allow adding items by pressing the Enter key
-    $('#input').on('keypress', function (e) {
+    $('#input').on("keypress", function (e) {
         if (e.which === 13) {
             newItem();
         }
